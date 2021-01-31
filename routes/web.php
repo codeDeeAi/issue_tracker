@@ -51,7 +51,10 @@ Route::prefix('app')->middleware(['auth'])->group(function(){
   Route::put('/update_issue_qa_status', [ProjectIssueController::class, 'updateQaStat']); 
   Route::put('/update_issue_dev_status', [ProjectIssueController::class, 'updateDevStat']);
   Route::put('/update_issue_qa_user', [ProjectIssueController::class, 'updateQaUser']);
-     
+  Route::put('/update_issue_dev_user', [ProjectIssueController::class, 'updateDevUser']);
+  Route::put('/update_issue_date_logged', [ProjectIssueController::class, 'updateDateLogged']);
+  Route::put('/update_issue_date_fixed', [ProjectIssueController::class, 'updateDateFixed']);
+  
   
 
   /**

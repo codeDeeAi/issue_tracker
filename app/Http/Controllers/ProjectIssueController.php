@@ -98,4 +98,42 @@ class ProjectIssueController extends Controller
         ]);
     }
     
+    /** Update QA User */
+    public function updateDevUser(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+            'value' => 'bail|required'
+        ]);
+ 
+        project_issue::where('id', $request->id)->update([
+             'dev_id' => $request->value
+        ]);
+    }
+
+     /** Update Date Logged  */
+     public function updateDateLogged(Request $request)
+     {
+         $this->validate($request, [
+             'id' => 'required',
+             'value' => 'bail|required'
+         ]);
+  
+         project_issue::where('id', $request->id)->update([
+              'date_logged' => $request->value
+         ]);
+     }
+
+      /** Update Date Fixed */
+    public function updateDateFixed(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+            'value' => 'bail|required'
+        ]);
+ 
+        project_issue::where('id', $request->id)->update([
+             'date_fixed' => $request->value
+        ]);
+    }
 }

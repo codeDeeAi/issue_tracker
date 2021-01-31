@@ -3936,6 +3936,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'token'],
@@ -4278,6 +4287,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['project_id', 'project_name'],
   data: function data() {
@@ -4301,6 +4381,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           value: null
         },
         devUser: {
+          id: null,
+          value: null
+        },
+        dateLogged: {
+          id: null,
+          value: null
+        },
+        dateFixed: {
           id: null,
           value: null
         }
@@ -4618,6 +4706,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
 
+    /**
+    * Open Dev users modal
+    */
+    openDEV: function openDEV(log, i) {
+      /**
+       * Assign Issue ID to post data
+       */
+      this.post.devUser.id = log.id;
+      /**
+       * Open Dev Modal
+       */
+
+      $('#devUserModal').modal('show');
+    },
+
+    /**
+     * Update Dev User
+     */
+    updateDevUser: function updateDevUser() {
+      var _this9 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.next = 2;
+                return _this9.callApi('put', 'app/update_issue_dev_user', _this9.post.devUser);
+
+              case 2:
+                res = _context9.sent;
+                if (res.status == 200) $('#devUserModal').modal('hide');
+                return _context9.abrupt("return", _this9.fetchData());
+
+              case 5:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9);
+      }))();
+    },
+
     /** 
      * Open QA Status Modal
      */
@@ -4633,28 +4765,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update QA Status
      */
     updateQaStatus: function updateQaStatus() {
-      var _this9 = this;
+      var _this10 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
           while (1) {
-            switch (_context9.prev = _context9.next) {
+            switch (_context10.prev = _context10.next) {
               case 0:
-                _context9.next = 2;
-                return _this9.callApi('put', 'app/update_issue_qa_status', _this9.post.qaStat);
+                _context10.next = 2;
+                return _this10.callApi('put', 'app/update_issue_qa_status', _this10.post.qaStat);
 
               case 2:
-                res = _context9.sent;
+                res = _context10.sent;
                 if (res.status == 200) $('#qaStatusModal').modal('hide');
-                return _context9.abrupt("return", _this9.fetchData());
+                return _context10.abrupt("return", _this10.fetchData());
 
               case 5:
               case "end":
-                return _context9.stop();
+                return _context10.stop();
             }
           }
-        }, _callee9);
+        }, _callee10);
       }))();
     },
 
@@ -4673,28 +4805,116 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update Dev Status 
      */
     updateDevStatus: function updateDevStatus() {
-      var _this10 = this;
+      var _this11 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
           while (1) {
-            switch (_context10.prev = _context10.next) {
+            switch (_context11.prev = _context11.next) {
               case 0:
-                _context10.next = 2;
-                return _this10.callApi('put', 'app/update_issue_dev_status', _this10.post.devStat);
+                _context11.next = 2;
+                return _this11.callApi('put', 'app/update_issue_dev_status', _this11.post.devStat);
 
               case 2:
-                res = _context10.sent;
+                res = _context11.sent;
                 if (res.status == 200) $('#devStatusModal').modal('hide');
-                return _context10.abrupt("return", _this10.fetchData());
+                return _context11.abrupt("return", _this11.fetchData());
 
               case 5:
               case "end":
-                return _context10.stop();
+                return _context11.stop();
             }
           }
-        }, _callee10);
+        }, _callee11);
+      }))();
+    },
+
+    /**
+    * Open Date Logged modal
+    */
+    openDateLoggedModal: function openDateLoggedModal(log, i) {
+      /**
+       * Assign Issue ID to post data
+       */
+      this.post.dateLogged.id = log.id;
+      /**
+       * Open Date Logged Modal
+       */
+
+      $('#dateLoggedModal').modal('show');
+    },
+
+    /**
+     * Update Date Logged
+     */
+    updateDateLogged: function updateDateLogged() {
+      var _this12 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+          while (1) {
+            switch (_context12.prev = _context12.next) {
+              case 0:
+                _context12.next = 2;
+                return _this12.callApi('put', 'app/update_issue_date_logged', _this12.post.dateLogged);
+
+              case 2:
+                res = _context12.sent;
+                if (res.status == 200) $('#dateLoggedModal').modal('hide');
+                return _context12.abrupt("return", _this12.fetchData());
+
+              case 5:
+              case "end":
+                return _context12.stop();
+            }
+          }
+        }, _callee12);
+      }))();
+    },
+
+    /**
+    * Open Date Fixed modal
+    */
+    openDateFixedModal: function openDateFixedModal(log, i) {
+      /**
+       * Assign Issue ID to post data
+       */
+      this.post.dateFixed.id = log.id;
+      /**
+       * Open Date Fixed Modal
+       */
+
+      $('#dateFixedModal').modal('show');
+    },
+
+    /**
+     * Update Date Fixed
+     */
+    updateDateFixed: function updateDateFixed() {
+      var _this13 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
+          while (1) {
+            switch (_context13.prev = _context13.next) {
+              case 0:
+                _context13.next = 2;
+                return _this13.callApi('put', 'app/update_issue_date_fixed', _this13.post.dateFixed);
+
+              case 2:
+                res = _context13.sent;
+                if (res.status == 200) $('#dateFixedModal').modal('hide');
+                return _context13.abrupt("return", _this13.fetchData());
+
+              case 5:
+              case "end":
+                return _context13.stop();
+            }
+          }
+        }, _callee13);
       }))();
     }
   },
@@ -24368,7 +24588,42 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("div", { staticClass: "a h-1/2" })
+      _c(
+        "div",
+        { staticClass: "a h-1/2" },
+        [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "grid grid-cols-2 md:grid-cols-3 gap-10" },
+            _vm._l(_vm.otherProjects.data, function(oth, ot) {
+              return _c("div", { key: ot, staticClass: "h-50" }, [
+                _vm._v(
+                  "\r\n                    " +
+                    _vm._s(oth) +
+                    "\r\n                    "
+                ),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary btn-sm",
+                    attrs: { href: "/project" + oth.id }
+                  },
+                  [_vm._v("Load")]
+                )
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("pagination", {
+            attrs: { data: _vm.otherProjects, size: "small" },
+            on: { "pagination-change-page": _vm.fetchOtherProjects }
+          })
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -24390,7 +24645,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -24508,6 +24763,14 @@ var staticRenderFns = [
           )
         ]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex justify-start" }, [
+      _c("h2", {}, [_vm._v("Other projects")])
     ])
   },
   function() {
@@ -24712,6 +24975,7 @@ var render = function() {
               _c(
                 "pre",
                 {
+                  staticClass: "cursor-pointer",
                   on: {
                     click: function($event) {
                       return _vm.openQA(log, i)
@@ -24727,7 +24991,27 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v("Mark")]),
+            _c("td", [
+              _c(
+                "pre",
+                {
+                  staticClass: "cursor-pointer",
+                  on: {
+                    click: function($event) {
+                      return _vm.openDateLoggedModal(log, i)
+                    }
+                  }
+                },
+                [
+                  log.date_logged !== null
+                    ? _c("span", [_vm._v(_vm._s(log.date_logged))])
+                    : _vm._e(),
+                  log.date_logged == null
+                    ? _c("span", [_vm._v("--")])
+                    : _vm._e()
+                ]
+              )
+            ]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -24744,7 +25028,25 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v("@mdo")]),
+            _c("td", [
+              _c(
+                "pre",
+                {
+                  staticClass: "cursor-pointer",
+                  on: {
+                    click: function($event) {
+                      return _vm.openDEV(log, i)
+                    }
+                  }
+                },
+                [
+                  log.dev !== null
+                    ? _c("span", [_vm._v(_vm._s(log.dev.name))])
+                    : _vm._e(),
+                  log.dev == null ? _c("span", [_vm._v("None")]) : _vm._e()
+                ]
+              )
+            ]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -24761,7 +25063,25 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v("Otto")]),
+            _c("td", [
+              _c(
+                "pre",
+                {
+                  staticClass: "cursor-pointer",
+                  on: {
+                    click: function($event) {
+                      return _vm.openDateFixedModal(log, i)
+                    }
+                  }
+                },
+                [
+                  log.date_fixed !== null
+                    ? _c("span", [_vm._v(_vm._s(log.date_fixed))])
+                    : _vm._e(),
+                  log.date_fixed == null ? _c("span", [_vm._v("--")]) : _vm._e()
+                ]
+              )
+            ]),
             _vm._v(" "),
             _vm._m(4, true)
           ])
@@ -25166,6 +25486,239 @@ var render = function() {
           ]
         )
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "devUserModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content px-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
+                },
+                [
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Choose one")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.post.devUser.value,
+                                expression: "post.devUser.value"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { autofocus: "" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.post.devUser,
+                                    "value",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.updateDevUser()
+                                }
+                              ]
+                            }
+                          },
+                          _vm._l(_vm.collaborators, function(coll, col) {
+                            return _c(
+                              "option",
+                              { key: col, domProps: { value: coll.user_id } },
+                              [_vm._v(_vm._s(coll.user[0].name))]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "dateLoggedModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content px-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
+                },
+                [
+                  _vm._m(10),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Choose a date")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.post.dateLogged.value,
+                              expression: "post.dateLogged.value"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "date", autofocus: "" },
+                          domProps: { value: _vm.post.dateLogged.value },
+                          on: {
+                            change: function($event) {
+                              return _vm.updateDateLogged()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.post.dateLogged,
+                                "value",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "dateFixedModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content px-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
+                },
+                [
+                  _vm._m(11),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Choose a date")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.post.dateFixed.value,
+                              expression: "post.dateFixed.value"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "date", autofocus: "" },
+                          domProps: { value: _vm.post.dateFixed.value },
+                          on: {
+                            change: function($event) {
+                              return _vm.updateDateFixed()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.post.dateFixed,
+                                "value",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -25248,6 +25801,51 @@ var staticRenderFns = [
       _c("a", { staticClass: "btn btn-sm btn-info", attrs: { href: "#!" } }, [
         _c("i", { staticClass: "fa fa-eye" })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex justify-end" }, [
+      _c(
+        "a",
+        {
+          staticClass: "close",
+          attrs: { href: "#!", "data-dismiss": "modal", "aria-label": "Close" }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex justify-end" }, [
+      _c(
+        "a",
+        {
+          staticClass: "close",
+          attrs: { href: "#!", "data-dismiss": "modal", "aria-label": "Close" }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex justify-end" }, [
+      _c(
+        "a",
+        {
+          staticClass: "close",
+          attrs: { href: "#!", "data-dismiss": "modal", "aria-label": "Close" }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {

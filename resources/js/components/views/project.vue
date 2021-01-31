@@ -58,13 +58,13 @@
             </td>
             <td>Otto</td>
             <td>
-                <pre @click="openQA(log, i)"><span v-if="log.qa !== null">{{log.qa.name}}</span><span v-if="log.qa == null">None</span></pre>
+                <pre @click="openQA(log, i)" class="cursor-pointer"><span v-if="log.qa !== null">{{log.qa.name}}</span><span v-if="log.qa == null">None</span></pre>
             </td>
-            <td>Mark</td>
+            <td><pre @click="openDateLoggedModal(log, i)" class="cursor-pointer"><span v-if="log.date_logged !== null">{{log.date_logged}}</span><span v-if="log.date_logged == null">--</span></pre></td>
             <td><pre @click="openQaStatusModal(log, i)" class="cursor-pointer">{{log.qa_status}}</pre></td>
-            <td>@mdo</td>
+            <td><pre @click="openDEV(log, i)" class="cursor-pointer"><span v-if="log.dev !== null">{{log.dev.name}}</span><span v-if="log.dev == null">None</span></pre></td>
             <td><pre @click="openDevStatusModal(log, i)" class="cursor-pointer">{{log.dev_status}}</pre></td>
-            <td>Otto</td>
+            <td><pre @click="openDateFixedModal(log, i)" class="cursor-pointer"><span v-if="log.date_fixed !== null">{{log.date_fixed}}</span><span v-if="log.date_fixed == null">--</span></pre></td>
             <td class="flex justify-between">
                 <a href="#!" class="btn btn-sm btn-secondary"><i class="fa fa-plus-circle"></i></a>
                 <a href="#!" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
@@ -182,6 +182,77 @@
         </div>
         </div>
         <!-- QA user Modal Ends -->
+        <!-- Dev user Modal -->
+        <div class="modal fade" id="devUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content px-4">            
+            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
+              <div class="flex justify-end">
+                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="">
+                <div class="">
+                    <div class="form-group">
+                        <label>Choose one</label>
+                        <select v-model="post.devUser.value" class="form-control" autofocus @change="updateDevUser()">
+                            <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id">{{coll.user[0].name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            </div>            
+            </div>
+        </div>
+        </div>
+        <!-- Dev user Modal Ends -->
+        <!-- Date Logged Modal -->
+        <div class="modal fade" id="dateLoggedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content px-4">            
+            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
+              <div class="flex justify-end">
+                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="">
+                <div class="">
+                    <div class="form-group">
+                        <label>Choose a date</label>
+                        <input type="date" v-model="post.dateLogged.value" @change="updateDateLogged()" class="form-control" autofocus>
+                    </div>
+                </div>
+            </div>
+            </div>            
+            </div>
+        </div>
+        </div>
+        <!-- Date Logged Modal Ends -->
+        <!-- Date Fixed Modal -->
+        <div class="modal fade" id="dateFixedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content px-4">            
+            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
+              <div class="flex justify-end">
+                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="">
+                <div class="">
+                    <div class="form-group">
+                        <label>Choose a date</label>
+                        <input type="date" v-model="post.dateFixed.value" @change="updateDateFixed()" class="form-control" autofocus>
+                    </div>
+                </div>
+            </div>
+            </div>            
+            </div>
+        </div>
+        </div>
+        <!-- Date Fixed Modal Ends -->
        <!-- Modals ends -->
     </div>
 </template>
@@ -212,6 +283,14 @@ export default {
                     value: null,
                 },
                 devUser:{
+                    id: null,
+                    value: null,
+                },
+                dateLogged:{
+                    id: null,
+                    value: null,
+                },
+                dateFixed:{
                     id: null,
                     value: null,
                 },
@@ -364,6 +443,32 @@ export default {
                 $('#qaUserModal').modal('hide')
                 return this.fetchData()
         },
+         /**
+         * Open Dev users modal
+         */
+        openDEV(log, i){
+            /**
+             * Assign Issue ID to post data
+             */
+            this.post.devUser.id = log.id
+            /**
+             * Open Dev Modal
+             */
+            $('#devUserModal').modal('show')
+        },
+        /**
+         * Update Dev User
+         */
+        async updateDevUser(){
+            const res = await this.callApi(
+                'put',
+                'app/update_issue_dev_user',
+                this.post.devUser
+            )
+            if(res.status == 200)
+                $('#devUserModal').modal('hide')
+                return this.fetchData()
+        },
         /** 
          * Open QA Status Modal
          */
@@ -408,6 +513,59 @@ export default {
                 $('#devStatusModal').modal('hide')
                 return this.fetchData()
         },
+         /**
+         * Open Date Logged modal
+         */
+        openDateLoggedModal(log, i){
+            /**
+             * Assign Issue ID to post data
+             */
+            this.post.dateLogged.id = log.id
+            /**
+             * Open Date Logged Modal
+             */
+            $('#dateLoggedModal').modal('show')
+        },
+        /**
+         * Update Date Logged
+         */
+        async updateDateLogged(){
+            const res = await this.callApi(
+                'put',
+                'app/update_issue_date_logged',
+                this.post.dateLogged
+            )
+            if(res.status == 200)
+                $('#dateLoggedModal').modal('hide')
+                return this.fetchData()
+        },
+         /**
+         * Open Date Fixed modal
+         */
+        openDateFixedModal(log, i){
+            /**
+             * Assign Issue ID to post data
+             */
+            this.post.dateFixed.id = log.id
+            /**
+             * Open Date Fixed Modal
+             */
+            $('#dateFixedModal').modal('show')
+        },
+        /**
+         * Update Date Fixed
+         */
+        async updateDateFixed(){
+            const res = await this.callApi(
+                'put',
+                'app/update_issue_date_fixed',
+                this.post.dateFixed
+            )
+            if(res.status == 200)
+                $('#dateFixedModal').modal('hide')
+                return this.fetchData()
+        },
+        
         
     },
     created(){

@@ -21,7 +21,16 @@
         </div>
         <hr>
         <div class="a h-1/2">
-        
+            <div class="flex justify-start">
+                <h2 class="">Other projects</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-10">
+                <div class="h-50" v-for="(oth , ot) in otherProjects.data" :key="ot">
+                    {{oth}}
+                    <a :href="`/project${oth.id}`" class="btn btn-primary btn-sm">Load</a>
+                </div>
+            </div>
+            <pagination :data="otherProjects" size="small" @pagination-change-page="fetchOtherProjects"></pagination>
         </div>
     </div>    
     <!-- Modal -->
