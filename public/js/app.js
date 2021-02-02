@@ -3945,6 +3945,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: ['user', 'token'],
@@ -4358,6 +4380,192 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['project_id', 'project_name'],
   data: function data() {
@@ -4368,6 +4576,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       collaborators: [],
       post: {
         module: '',
+        issue: '',
         qaStat: {
           id: null,
           value: ''
@@ -4391,7 +4600,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         dateFixed: {
           id: null,
           value: null
-        }
+        },
+        removeCollaborator: null
       },
       searchUser: '',
       allSearchedUsers: []
@@ -4574,6 +4784,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
 
+    /** 
+     * Update module text
+     */
+    triggerTextUpdateForModule: function triggerTextUpdateForModule(log, i) {
+      this.post.module = log.module;
+    },
+
     /**
      * Update Module
      */
@@ -4594,12 +4811,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 res = _context6.sent;
-
-                if (!(res.status == 200)) {
-                  _context6.next = 5;
-                  break;
-                }
-
+                if (res.status == 200) _this6.post.module = '';
                 return _context6.abrupt("return", _this6.fetchData());
 
               case 5:
@@ -4608,6 +4820,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee6);
+      }))();
+    },
+
+    /** 
+     * Update issue text
+     */
+    triggerTextUpdateForIssue: function triggerTextUpdateForIssue(log, i) {
+      this.post.issue = log.issue;
+    },
+
+    /**
+     * Update issue
+     */
+    updateIssue: function updateIssue(log, i) {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return _this7.callApi('put', 'app/update_issue_issue', {
+                  id: log.id,
+                  value: _this7.post.issue
+                });
+
+              case 2:
+                res = _context7.sent;
+                if (res.status == 200) _this7.post.issue = '';
+                return _context7.abrupt("return", _this7.fetchData());
+
+              case 5:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
       }))();
     },
 
@@ -4622,43 +4873,96 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Add Collaborators
      */
     addCollaborator: function addCollaborator(user, u) {
-      var _this7 = this;
+      var _this8 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
-                _context7.next = 2;
-                return _this7.callApi('put', 'app/add_collaborator_to_project', {
+                _context8.next = 2;
+                return _this8.callApi('put', 'app/add_collaborator_to_project', {
                   'user_id': user.id,
-                  'project_id': _this7.project_id
+                  'project_id': _this8.project_id
                 });
 
               case 2:
-                res = _context7.sent;
+                res = _context8.sent;
 
                 if (!(res.status == 200)) {
-                  _context7.next = 8;
+                  _context8.next = 8;
                   break;
                 }
 
-                _this7.toast("".concat(user.name, " has been added as a collaborator"), 'success');
+                _this8.toast("".concat(user.name, " has been added as a collaborator"), 'success');
 
-                return _context7.abrupt("return", _this7.fetchCollaborators());
+                return _context8.abrupt("return", _this8.fetchCollaborators());
 
               case 8:
                 if (res.status == 403) {
-                  _this7.toastError(res.data.message);
+                  _this8.toastError(res.data.message);
                 }
 
               case 9:
               case "end":
-                return _context7.stop();
+                return _context8.stop();
             }
           }
-        }, _callee7);
+        }, _callee8);
+      }))();
+    },
+
+    /**
+     * Open Remove COllaborators Modal
+     */
+    openRemoveCollaborators: function openRemoveCollaborators() {
+      /**
+       * Open modal
+       */
+      $('#removeCollaboratorModal').modal('show');
+    },
+
+    /**
+     * Remove Collaborator
+     */
+    removeCollaborator: function removeCollaborator() {
+      var _this9 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                if (confirm) {
+                  _context9.next = 4;
+                  break;
+                }
+
+                return _context9.abrupt("return", _this9.toast('This Collaborator will not be removed from this project!', 'info'));
+
+              case 4:
+                _context9.next = 6;
+                return _this9.callApi('delete', "app/remove_collaborator_from_project/".concat(_this9.project_id, "/").concat(_this9.post.removeCollaborator), {});
+
+              case 6:
+                res = _context9.sent;
+
+                if (res.status == 200) {
+                  _this9.toast("".concat(user.name, " has been added as a collaborator"), 'success');
+
+                  _this9.fetchCollaborators();
+
+                  _this9.fetchData();
+                }
+
+              case 8:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9);
       }))();
     },
 
@@ -4681,28 +4985,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update QA User
      */
     updateQaUser: function updateQaUser() {
-      var _this8 = this;
+      var _this10 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context10.prev = _context10.next) {
               case 0:
-                _context8.next = 2;
-                return _this8.callApi('put', 'app/update_issue_qa_user', _this8.post.qaUser);
+                _context10.next = 2;
+                return _this10.callApi('put', 'app/update_issue_qa_user', _this10.post.qaUser);
 
               case 2:
-                res = _context8.sent;
+                res = _context10.sent;
                 if (res.status == 200) $('#qaUserModal').modal('hide');
-                return _context8.abrupt("return", _this8.fetchData());
+                return _context10.abrupt("return", _this10.fetchData());
 
               case 5:
               case "end":
-                return _context8.stop();
+                return _context10.stop();
             }
           }
-        }, _callee8);
+        }, _callee10);
       }))();
     },
 
@@ -4725,28 +5029,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update Dev User
      */
     updateDevUser: function updateDevUser() {
-      var _this9 = this;
+      var _this11 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
           while (1) {
-            switch (_context9.prev = _context9.next) {
+            switch (_context11.prev = _context11.next) {
               case 0:
-                _context9.next = 2;
-                return _this9.callApi('put', 'app/update_issue_dev_user', _this9.post.devUser);
+                _context11.next = 2;
+                return _this11.callApi('put', 'app/update_issue_dev_user', _this11.post.devUser);
 
               case 2:
-                res = _context9.sent;
+                res = _context11.sent;
                 if (res.status == 200) $('#devUserModal').modal('hide');
-                return _context9.abrupt("return", _this9.fetchData());
+                return _context11.abrupt("return", _this11.fetchData());
 
               case 5:
               case "end":
-                return _context9.stop();
+                return _context11.stop();
             }
           }
-        }, _callee9);
+        }, _callee11);
       }))();
     },
 
@@ -4765,28 +5069,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update QA Status
      */
     updateQaStatus: function updateQaStatus() {
-      var _this10 = this;
+      var _this12 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
           while (1) {
-            switch (_context10.prev = _context10.next) {
+            switch (_context12.prev = _context12.next) {
               case 0:
-                _context10.next = 2;
-                return _this10.callApi('put', 'app/update_issue_qa_status', _this10.post.qaStat);
+                _context12.next = 2;
+                return _this12.callApi('put', 'app/update_issue_qa_status', _this12.post.qaStat);
 
               case 2:
-                res = _context10.sent;
+                res = _context12.sent;
                 if (res.status == 200) $('#qaStatusModal').modal('hide');
-                return _context10.abrupt("return", _this10.fetchData());
+                return _context12.abrupt("return", _this12.fetchData());
 
               case 5:
               case "end":
-                return _context10.stop();
+                return _context12.stop();
             }
           }
-        }, _callee10);
+        }, _callee12);
       }))();
     },
 
@@ -4805,28 +5109,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update Dev Status 
      */
     updateDevStatus: function updateDevStatus() {
-      var _this11 = this;
+      var _this13 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
           while (1) {
-            switch (_context11.prev = _context11.next) {
+            switch (_context13.prev = _context13.next) {
               case 0:
-                _context11.next = 2;
-                return _this11.callApi('put', 'app/update_issue_dev_status', _this11.post.devStat);
+                _context13.next = 2;
+                return _this13.callApi('put', 'app/update_issue_dev_status', _this13.post.devStat);
 
               case 2:
-                res = _context11.sent;
+                res = _context13.sent;
                 if (res.status == 200) $('#devStatusModal').modal('hide');
-                return _context11.abrupt("return", _this11.fetchData());
+                return _context13.abrupt("return", _this13.fetchData());
 
               case 5:
               case "end":
-                return _context11.stop();
+                return _context13.stop();
             }
           }
-        }, _callee11);
+        }, _callee13);
       }))();
     },
 
@@ -4849,28 +5153,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update Date Logged
      */
     updateDateLogged: function updateDateLogged() {
-      var _this12 = this;
+      var _this14 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee14() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee14$(_context14) {
           while (1) {
-            switch (_context12.prev = _context12.next) {
+            switch (_context14.prev = _context14.next) {
               case 0:
-                _context12.next = 2;
-                return _this12.callApi('put', 'app/update_issue_date_logged', _this12.post.dateLogged);
+                _context14.next = 2;
+                return _this14.callApi('put', 'app/update_issue_date_logged', _this14.post.dateLogged);
 
               case 2:
-                res = _context12.sent;
+                res = _context14.sent;
                 if (res.status == 200) $('#dateLoggedModal').modal('hide');
-                return _context12.abrupt("return", _this12.fetchData());
+                return _context14.abrupt("return", _this14.fetchData());
 
               case 5:
               case "end":
-                return _context12.stop();
+                return _context14.stop();
             }
           }
-        }, _callee12);
+        }, _callee14);
       }))();
     },
 
@@ -4893,28 +5197,90 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      * Update Date Fixed
      */
     updateDateFixed: function updateDateFixed() {
-      var _this13 = this;
+      var _this15 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee15() {
         var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee15$(_context15) {
           while (1) {
-            switch (_context13.prev = _context13.next) {
+            switch (_context15.prev = _context15.next) {
               case 0:
-                _context13.next = 2;
-                return _this13.callApi('put', 'app/update_issue_date_fixed', _this13.post.dateFixed);
+                _context15.next = 2;
+                return _this15.callApi('put', 'app/update_issue_date_fixed', _this15.post.dateFixed);
 
               case 2:
-                res = _context13.sent;
+                res = _context15.sent;
                 if (res.status == 200) $('#dateFixedModal').modal('hide');
-                return _context13.abrupt("return", _this13.fetchData());
+                return _context15.abrupt("return", _this15.fetchData());
 
               case 5:
               case "end":
-                return _context13.stop();
+                return _context15.stop();
             }
           }
-        }, _callee13);
+        }, _callee15);
+      }))();
+    },
+
+    /**
+     * Open Attachment Modal
+     */
+    openAttachmentModal: function openAttachmentModal(log, i) {
+      /** open modal */
+      $('#attachmentModal').modal('show');
+    },
+
+    /**
+     * View Attachment Modal
+     */
+    viewAttachments: function viewAttachments(log, i) {
+      /** open modal */
+      $('#viewAttachmentModal').modal('show');
+    },
+
+    /**
+     * Delete Project
+     */
+    deleteProject: function deleteProject() {
+      var _this16 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee16() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee16$(_context16) {
+          while (1) {
+            switch (_context16.prev = _context16.next) {
+              case 0:
+                if (confirm) {
+                  _context16.next = 4;
+                  break;
+                }
+
+                _this16.toast('Project will not be deleted', 'info');
+
+                _context16.next = 8;
+                break;
+
+              case 4:
+                _context16.next = 6;
+                return _this16.callApi('delete', "app/delete_project/".concat(_this16.project_id), {});
+
+              case 6:
+                res = _context16.sent;
+
+                if (res.status == 200) {
+                  window.location.assign('/dashboard');
+                } else if (res.status == 403) {
+                  _this16.toastError(res.data.message);
+                } else {
+                  _this16.toastError('Something went wrong');
+                }
+
+              case 8:
+              case "end":
+                return _context16.stop();
+            }
+          }
+        }, _callee16);
       }))();
     }
   },
@@ -24547,7 +24913,7 @@ var render = function() {
     _c("div", { staticClass: "py-12" }, [
       _c(
         "div",
-        { staticClass: "a h-1/2" },
+        { staticClass: "a h-1/2 my-2" },
         [
           _vm._m(0),
           _vm._v(" "),
@@ -24555,24 +24921,72 @@ var render = function() {
             "div",
             { staticClass: "grid grid-cols-2 md:grid-cols-3 gap-10" },
             [
-              _vm._m(1),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "rounded h-40 border my-4 btn-primary hover:shadow py-auto",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#staticBackdrop"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\r\n                        Create New Project\r\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "h-50" }),
               _vm._v(" "),
               _vm._l(_vm.myProjects.data, function(pro, p) {
-                return _c("div", { key: p, staticClass: "h-50" }, [
-                  _vm._v(
-                    "\r\n                    " +
-                      _vm._s(pro) +
-                      "\r\n                    "
-                  ),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary btn-sm",
-                      attrs: { href: "/project" + pro.id }
-                    },
-                    [_vm._v("Load")]
-                  )
-                ])
+                return _c(
+                  "div",
+                  {
+                    key: p,
+                    staticClass:
+                      "rounded h-40 border my-4 hover:shadow cursor-pointer"
+                  },
+                  [
+                    _c("form", { staticClass: "flex-auto pl-6 py-4 px-4" }, [
+                      _c(
+                        "h1",
+                        {
+                          staticClass: "w-full flex-none font-semibold mb-2.5"
+                        },
+                        [
+                          _vm._v(
+                            "\r\n                           " +
+                              _vm._s(pro.name) +
+                              "\r\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-sm font-medium" }, [
+                        _vm._v(
+                          "\r\n                            " +
+                            _vm._s(pro.description) +
+                            "\r\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex justify-end" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn flex justify-between btn-sm rounded-full btn-primary text-white px-auto py-auto",
+                            attrs: { href: "/project" + pro.id }
+                          },
+                          [_c("i", { staticClass: "fa fa-arrow-right fa-2x" })]
+                        )
+                      ])
+                    ])
+                  ]
+                )
               })
             ],
             2
@@ -24590,29 +25004,63 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "a h-1/2" },
+        { staticClass: "a h-1/2 my-2" },
         [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: "grid grid-cols-2 md:grid-cols-3 gap-10" },
             _vm._l(_vm.otherProjects.data, function(oth, ot) {
-              return _c("div", { key: ot, staticClass: "h-50" }, [
-                _vm._v(
-                  "\r\n                    " +
-                    _vm._s(oth) +
-                    "\r\n                    "
-                ),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary btn-sm",
-                    attrs: { href: "/project" + oth.id }
-                  },
-                  [_vm._v("Load")]
-                )
-              ])
+              return _c(
+                "div",
+                {
+                  key: ot,
+                  staticClass:
+                    "rounded h-40 border my-4 hover:shadow cursor-pointer"
+                },
+                [
+                  _c("form", { staticClass: "flex-auto pl-6 py-4 px-4" }, [
+                    _c("div", { staticClass: "flex justify-end" }, [
+                      _c("p", { staticClass: "text-sm italic" }, [
+                        _vm._v(_vm._s(oth.admin.name))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "h1",
+                      { staticClass: "w-full flex-none font-semibold mb-2.5" },
+                      [
+                        _vm._v(
+                          "\r\n                           " +
+                            _vm._s(oth.name) +
+                            "\r\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-sm font-medium" }, [
+                      _vm._v(
+                        "\r\n                            " +
+                          _vm._s(oth.description) +
+                          "\r\n                        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex justify-end" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "btn flex justify-between btn-sm rounded-full btn-primary text-white px-auto py-auto",
+                          attrs: { href: "/project" + oth.id }
+                        },
+                        [_c("i", { staticClass: "fa fa-arrow-right fa-2x" })]
+                      )
+                    ])
+                  ])
+                ]
+              )
             }),
             0
           ),
@@ -24645,7 +25093,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -24738,31 +25186,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-start" }, [
-      _c("h2", {}, [_vm._v("My projects")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "h-50" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#staticBackdrop"
-          }
-        },
-        [
-          _vm._v(
-            "\r\n                        create new project\r\n                    "
-          )
-        ]
-      )
+    return _c("div", { staticClass: "flex justify-start py-2" }, [
+      _c("h2", { staticClass: "h2 font-semibold" }, [_vm._v("My projects")])
     ])
   },
   function() {
@@ -24770,7 +25195,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "flex justify-start" }, [
-      _c("h2", {}, [_vm._v("Other projects")])
+      _c("h2", { staticClass: "h2 font-semibold py-2" }, [
+        _vm._v("Other projects")
+      ])
     ])
   },
   function() {
@@ -24845,9 +25272,7 @@ var render = function() {
                 [_c("i", { staticClass: "fa fa-plus" })]
               ),
               _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1)
+              _vm._m(0)
             ])
           ]),
           _vm._v(" "),
@@ -24866,228 +25291,624 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "dropdown" }, [
-              _vm._m(2),
+            _c("div", { staticClass: "flex justify-end gap-2" }, [
+              _c("div", { staticClass: "dropdown dropleft" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "dropdown-menu",
+                    attrs: { "aria-labelledby": "dropdownMenuLink" }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.openCollaborators()
+                          }
+                        }
+                      },
+                      [_vm._v("Add collaborator")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.openRemoveCollaborators()
+                          }
+                        }
+                      },
+                      [_vm._v("Remove collaborator")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteProject()
+                          }
+                        }
+                      },
+                      [_vm._v("Delete Project")]
+                    )
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c(
-                "div",
+                "a",
                 {
-                  staticClass: "dropdown-menu",
-                  attrs: { "aria-labelledby": "dropdownMenuLink" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "dropdown-item",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.openCollaborators()
-                        }
-                      }
-                    },
-                    [_vm._v("Add collaborator")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "dropdown-item", attrs: { href: "#" } },
-                    [_vm._v("Remove collaborator")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "dropdown-item", attrs: { href: "#" } },
-                    [_vm._v("Delete Project")]
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-sm btn-primary",
-                attrs: { href: "#!" },
-                on: {
-                  click: function($event) {
-                    return _vm.toggleTray()
+                  staticClass: "btn btn-sm btn-primary",
+                  attrs: { href: "#!" },
+                  on: {
+                    click: function($event) {
+                      return _vm.toggleTray()
+                    }
                   }
-                }
-              },
-              [_c("i", { staticClass: "fa fa-search" })]
-            )
+                },
+                [_c("i", { staticClass: "fa fa-search" })]
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
         _vm.opentray == true
-          ? _c("div", { staticClass: "py-6 bg-blue-500" })
+          ? _c("div", {}, [
+              _c(
+                "div",
+                { staticClass: "my-2 flex sm:flex-row flex-col gap-4" },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex flex-row mb-1 sm:mb-0" }, [
+                    _c("div", { staticClass: "relative" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "fill-current h-4 w-4",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 20 20"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "relative" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "fill-current h-4 w-4",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 20 20"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "block relative" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass:
+                          "h-full absolute inset-y-0 left-0 flex items-center pl-2"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "h-4 w-4 fill-current text-gray-500",
+                            attrs: { viewBox: "0 0 24 24" }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass:
+                        "appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none",
+                      attrs: { placeholder: "Search" }
+                    })
+                  ])
+                ]
+              )
+            ])
           : _vm._e()
       ])
     ]),
     _vm._v(" "),
-    _c("table", { staticClass: "table table-striped table-bordered" }, [
-      _vm._m(3),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.data, function(log, i) {
-          return _c("tr", { key: i }, [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(log.id))]),
-            _vm._v(" "),
-            _c("td", [
-              _c("div", { staticClass: "form-group" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.post.module,
-                      expression: "post.module"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: log.module,
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.post.module },
-                  on: {
-                    change: function($event) {
-                      return _vm.updateModule(log, i)
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.post, "module", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Otto")]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "pre",
-                {
-                  staticClass: "cursor-pointer",
-                  on: {
-                    click: function($event) {
-                      return _vm.openQA(log, i)
-                    }
-                  }
-                },
-                [
-                  log.qa !== null
-                    ? _c("span", [_vm._v(_vm._s(log.qa.name))])
-                    : _vm._e(),
-                  log.qa == null ? _c("span", [_vm._v("None")]) : _vm._e()
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "pre",
-                {
-                  staticClass: "cursor-pointer",
-                  on: {
-                    click: function($event) {
-                      return _vm.openDateLoggedModal(log, i)
-                    }
-                  }
-                },
-                [
-                  log.date_logged !== null
-                    ? _c("span", [_vm._v(_vm._s(log.date_logged))])
-                    : _vm._e(),
-                  log.date_logged == null
-                    ? _c("span", [_vm._v("--")])
-                    : _vm._e()
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "pre",
-                {
-                  staticClass: "cursor-pointer",
-                  on: {
-                    click: function($event) {
-                      return _vm.openQaStatusModal(log, i)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(log.qa_status))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "pre",
-                {
-                  staticClass: "cursor-pointer",
-                  on: {
-                    click: function($event) {
-                      return _vm.openDEV(log, i)
-                    }
-                  }
-                },
-                [
-                  log.dev !== null
-                    ? _c("span", [_vm._v(_vm._s(log.dev.name))])
-                    : _vm._e(),
-                  log.dev == null ? _c("span", [_vm._v("None")]) : _vm._e()
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "pre",
-                {
-                  staticClass: "cursor-pointer",
-                  on: {
-                    click: function($event) {
-                      return _vm.openDevStatusModal(log, i)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(log.dev_status))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "pre",
-                {
-                  staticClass: "cursor-pointer",
-                  on: {
-                    click: function($event) {
-                      return _vm.openDateFixedModal(log, i)
-                    }
-                  }
-                },
-                [
-                  log.date_fixed !== null
-                    ? _c("span", [_vm._v(_vm._s(log.date_fixed))])
-                    : _vm._e(),
-                  log.date_fixed == null ? _c("span", [_vm._v("--")]) : _vm._e()
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(4, true)
-          ])
-        }),
-        0
-      )
+    _c("div", { staticClass: "container mx-auto px-4 sm:px-8" }, [
+      _c("div", { staticClass: "py-8" }, [
+        _c(
+          "div",
+          { staticClass: "-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto" },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "inline-block min-w-full shadow rounded-lg overflow-hidden"
+              },
+              [
+                _c(
+                  "table",
+                  { staticClass: "min-w-full leading-normal table-auto" },
+                  [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.data, function(log, i) {
+                        return _c("tr", { key: i }, [
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "text-gray-900 whitespace-no-wrap"
+                                },
+                                [_vm._v(_vm._s(i))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                " border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "form-group text-gray-900 whitespace-no-wrap"
+                                },
+                                [
+                                  _c("textarea", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.post.module,
+                                        expression: "post.module"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "form-control border-0 min-w-full",
+                                    attrs: {
+                                      placeholder: log.module,
+                                      autofocus: ""
+                                    },
+                                    domProps: { value: _vm.post.module },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.triggerTextUpdateForModule(
+                                          log,
+                                          i
+                                        )
+                                      },
+                                      change: function($event) {
+                                        return _vm.updateModule(log, i)
+                                      },
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.post,
+                                          "module",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "form-group text-gray-900 whitespace-no-wrap"
+                                },
+                                [
+                                  _c("textarea", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.post.issue,
+                                        expression: "post.issue"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "form-control border-0 min-w-full",
+                                    attrs: {
+                                      placeholder: log.issue,
+                                      autofocus: ""
+                                    },
+                                    domProps: { value: _vm.post.issue },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.triggerTextUpdateForIssue(
+                                          log,
+                                          i
+                                        )
+                                      },
+                                      change: function($event) {
+                                        return _vm.updateIssue(log, i)
+                                      },
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.post,
+                                          "issue",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "pre",
+                                {
+                                  staticClass:
+                                    "cursor-pointer text-gray-900 whitespace-no-wrap",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openQA(log, i)
+                                    }
+                                  }
+                                },
+                                [
+                                  log.qa !== null
+                                    ? _c("span", [_vm._v(_vm._s(log.qa.name))])
+                                    : _vm._e(),
+                                  log.qa == null
+                                    ? _c("span", [_vm._v("None")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "pre",
+                                {
+                                  staticClass:
+                                    "cursor-pointer text-gray-900 whitespace-no-wrap",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openDateLoggedModal(log, i)
+                                    }
+                                  }
+                                },
+                                [
+                                  log.date_logged !== null
+                                    ? _c("span", [
+                                        _vm._v(_vm._s(log.date_logged))
+                                      ])
+                                    : _vm._e(),
+                                  log.date_logged == null
+                                    ? _c("span", [_vm._v("--")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass:
+                                      "absolute inset-0 bg-green-200 opacity-50 rounded-full",
+                                    attrs: { "aria-hidden": "" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "relative" }, [
+                                    _c(
+                                      "pre",
+                                      {
+                                        staticClass: "cursor-pointer",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openQaStatusModal(log, i)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(log.qa_status))]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "text-gray-900 whitespace-no-wrap"
+                                },
+                                [
+                                  _c(
+                                    "pre",
+                                    {
+                                      staticClass: "cursor-pointer",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.openDEV(log, i)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      log.dev !== null
+                                        ? _c("span", [
+                                            _vm._v(_vm._s(log.dev.name))
+                                          ])
+                                        : _vm._e(),
+                                      log.dev == null
+                                        ? _c("span", [_vm._v("None")])
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass:
+                                      "absolute inset-0 bg-green-200 opacity-50 rounded-full",
+                                    attrs: { "aria-hidden": "" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "relative" }, [
+                                    _c(
+                                      "pre",
+                                      {
+                                        staticClass: "cursor-pointer",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openDevStatusModal(
+                                              log,
+                                              i
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(log.dev_status))]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                            },
+                            [
+                              _c(
+                                "pre",
+                                {
+                                  staticClass:
+                                    "cursor-pointer text-gray-900 whitespace-no-wrap",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openDateFixedModal(log, i)
+                                    }
+                                  }
+                                },
+                                [
+                                  log.date_fixed !== null
+                                    ? _c("span", [
+                                        _vm._v(_vm._s(log.date_fixed))
+                                      ])
+                                    : _vm._e(),
+                                  log.date_fixed == null
+                                    ? _c("span", [_vm._v("--")])
+                                    : _vm._e()
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "flex justify-between px-5 py-5 border-b border-gray-200 bg-white text-sm gap-2"
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-sm btn-secondary text-gray-900 whitespace-no-wrap",
+                                  attrs: {
+                                    href: "#!",
+                                    "data-toggle": "tooltip",
+                                    "data-placement": "top",
+                                    title:
+                                      "Add attachment(s) (pictures, screenshots)"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openAttachmentModal(log, i)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-plus-circle" })]
+                              ),
+                              _vm._v(" "),
+                              log.images.length
+                                ? _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "btn btn-sm btn-info text-gray-900 whitespace-no-wrap",
+                                      attrs: {
+                                        href: "#!",
+                                        "data-toggle": "tooltip",
+                                        "data-placement": "top",
+                                        title: "View attachments"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.viewAttachments(log, i)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fa fa-eye" })]
+                                  )
+                                : _vm._e()
+                            ]
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        )
+      ])
     ]),
     _vm._v(" "),
     _c(
@@ -25115,7 +25936,7 @@ var render = function() {
                     "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
                 },
                 [
-                  _vm._m(5),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c("div", {}, [
                     _c("div", { staticClass: "py-3" }, [
@@ -25233,7 +26054,7 @@ var render = function() {
                     "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
                 },
                 [
-                  _vm._m(6),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c("div", {}, [
                     _c("div", {}, [
@@ -25329,7 +26150,7 @@ var render = function() {
                     "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
                 },
                 [
-                  _vm._m(7),
+                  _vm._m(8),
                   _vm._v(" "),
                   _c("div", {}, [
                     _c("div", { staticClass: "form-group" }, [
@@ -25422,7 +26243,7 @@ var render = function() {
                     "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
                 },
                 [
-                  _vm._m(8),
+                  _vm._m(9),
                   _vm._v(" "),
                   _c("div", {}, [
                     _c("div", {}, [
@@ -25468,14 +26289,27 @@ var render = function() {
                               ]
                             }
                           },
-                          _vm._l(_vm.collaborators, function(coll, col) {
-                            return _c(
-                              "option",
-                              { key: col, domProps: { value: coll.user_id } },
-                              [_vm._v(_vm._s(coll.user[0].name))]
-                            )
-                          }),
-                          0
+                          [
+                            _vm._l(_vm.author, function(author, auth) {
+                              return _c(
+                                "option",
+                                {
+                                  key: auth,
+                                  domProps: { value: author.admin.id }
+                                },
+                                [_vm._v(_vm._s(author.admin.name))]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.collaborators, function(coll, col) {
+                              return _c(
+                                "option",
+                                { key: col, domProps: { value: coll.user_id } },
+                                [_vm._v(_vm._s(coll.user[0].name))]
+                              )
+                            })
+                          ],
+                          2
                         )
                       ])
                     ])
@@ -25513,7 +26347,7 @@ var render = function() {
                     "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
                 },
                 [
-                  _vm._m(9),
+                  _vm._m(10),
                   _vm._v(" "),
                   _c("div", {}, [
                     _c("div", {}, [
@@ -25559,14 +26393,27 @@ var render = function() {
                               ]
                             }
                           },
-                          _vm._l(_vm.collaborators, function(coll, col) {
-                            return _c(
-                              "option",
-                              { key: col, domProps: { value: coll.user_id } },
-                              [_vm._v(_vm._s(coll.user[0].name))]
-                            )
-                          }),
-                          0
+                          [
+                            _vm._l(_vm.author, function(author, auth) {
+                              return _c(
+                                "option",
+                                {
+                                  key: auth,
+                                  domProps: { value: author.admin.id }
+                                },
+                                [_vm._v(_vm._s(author.admin.name))]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.collaborators, function(coll, col) {
+                              return _c(
+                                "option",
+                                { key: col, domProps: { value: coll.user_id } },
+                                [_vm._v(_vm._s(coll.user[0].name))]
+                              )
+                            })
+                          ],
+                          2
                         )
                       ])
                     ])
@@ -25604,7 +26451,7 @@ var render = function() {
                     "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
                 },
                 [
-                  _vm._m(10),
+                  _vm._m(11),
                   _vm._v(" "),
                   _c("div", {}, [
                     _c("div", {}, [
@@ -25675,7 +26522,7 @@ var render = function() {
                     "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
                 },
                 [
-                  _vm._m(11),
+                  _vm._m(12),
                   _vm._v(" "),
                   _c("div", {}, [
                     _c("div", {}, [
@@ -25719,7 +26566,102 @@ var render = function() {
           ]
         )
       ]
-    )
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "removeCollaboratorModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content px-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
+                },
+                [
+                  _vm._m(13),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("Choose one")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.post.removeCollaborator,
+                                expression: "post.removeCollaborator"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { autofocus: "" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.post,
+                                    "removeCollaborator",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.removeCollaborator()
+                                }
+                              ]
+                            }
+                          },
+                          _vm._l(_vm.collaborators, function(coll, col) {
+                            return _c(
+                              "option",
+                              { key: col, domProps: { value: coll.user_id } },
+                              [_vm._v(_vm._s(coll.user[0].name))]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _vm._m(14),
+    _vm._v(" "),
+    _vm._m(15)
   ])
 }
 var staticRenderFns = [
@@ -25727,17 +26669,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "btn btn-sm", attrs: { href: "#!" } }, [
-      _c("i", { staticClass: "fa fa-plus" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "btn btn-sm", attrs: { href: "#!" } }, [
-      _c("i", { staticClass: "fa fa-plus" })
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-sm btn-info",
+        attrs: {
+          href: "#!",
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Export sheet"
+        }
+      },
+      [_c("i", { staticClass: "fa fa-file-export" })]
+    )
   },
   function() {
     var _vm = this
@@ -25763,27 +26707,185 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h4", { staticClass: "text-2xl font-semibold leading-tight" }, [
+        _vm._v("Filters")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "select",
+      {
+        staticClass:
+          "appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      },
+      [
+        _c("option", [_vm._v("5")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("10")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("20")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "select",
+      {
+        staticClass:
+          "appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500"
+      },
+      [
+        _c("option", [_vm._v("All")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("Active")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("Inactive")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                #\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Module")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                Module\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Issue")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                Issue\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("QA user")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                QA user\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date Logged")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                Date Logged\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("QA status")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                QA status\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dev user")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                Dev user\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dev status")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                Dev status\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date Fixed")]),
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                                Date Fixed\n                            "
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Handle")])
+        _c(
+          "th",
+          {
+            staticClass:
+              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          },
+          [
+            _vm._v(
+              "\n                               Handle\n                            "
+            )
+          ]
+        )
       ])
     ])
   },
@@ -25791,22 +26893,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "flex justify-between" }, [
-      _c(
-        "a",
-        { staticClass: "btn btn-sm btn-secondary", attrs: { href: "#!" } },
-        [_c("i", { staticClass: "fa fa-plus-circle" })]
-      ),
-      _vm._v(" "),
-      _c("a", { staticClass: "btn btn-sm btn-info", attrs: { href: "#!" } }, [
-        _c("i", { staticClass: "fa fa-eye" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "flex justify-end" }, [
       _c(
         "a",
@@ -25907,6 +26993,149 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex justify-end" }, [
+      _c(
+        "a",
+        {
+          staticClass: "close",
+          attrs: { href: "#!", "data-dismiss": "modal", "aria-label": "Close" }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "viewAttachmentModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content px-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
+                },
+                [
+                  _c("div", { staticClass: "flex justify-end" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "close",
+                        attrs: {
+                          href: "#!",
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _vm._v("\n                    View\n                ")
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "attachmentModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content px-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
+                },
+                [
+                  _c("div", { staticClass: "flex justify-end" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "close",
+                        attrs: {
+                          href: "#!",
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _vm._v(
+                          "\n                    Upload \n                "
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true

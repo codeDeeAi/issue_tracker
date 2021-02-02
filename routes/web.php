@@ -40,6 +40,8 @@ Route::prefix('app')->middleware(['auth'])->group(function(){
     Route::post('/create_new_project', [ProjectController::class, 'create']);
     Route::get('/get_my_projects', [ProjectController::class, 'show']);
     Route::get('/get_other_projects', [ProjectController::class, 'showOthers']);
+    Route::delete('/delete_project/{project_id}', [ProjectController::class, 'destroy']);
+    
     
    /**
     * Issues Tracker 
@@ -48,12 +50,14 @@ Route::prefix('app')->middleware(['auth'])->group(function(){
   Route::get('/get_project_author/{id}', [ProjectIssueController::class, 'showAuthor']);
   Route::post('/create_new_issue', [ProjectIssueController::class, 'create']);  
   Route::put('/update_issue_module', [ProjectIssueController::class, 'updateModule']); 
+  Route::put('/update_issue_issue', [ProjectIssueController::class, 'updateIssue']);
   Route::put('/update_issue_qa_status', [ProjectIssueController::class, 'updateQaStat']); 
   Route::put('/update_issue_dev_status', [ProjectIssueController::class, 'updateDevStat']);
   Route::put('/update_issue_qa_user', [ProjectIssueController::class, 'updateQaUser']);
   Route::put('/update_issue_dev_user', [ProjectIssueController::class, 'updateDevUser']);
   Route::put('/update_issue_date_logged', [ProjectIssueController::class, 'updateDateLogged']);
   Route::put('/update_issue_date_fixed', [ProjectIssueController::class, 'updateDateFixed']);
+  
   
   
 
@@ -63,7 +67,7 @@ Route::prefix('app')->middleware(['auth'])->group(function(){
   Route::get('/get_project_collaborators/{id}', [ProjectCollaboratorController::class, 'index']); 
   Route::get('/get_search_users/{email}', [ProjectCollaboratorController::class, 'showUsers']);
   Route::put('/add_collaborator_to_project', [ProjectCollaboratorController::class, 'create']);  
-  
+  Route::delete('/remove_collaborator_from_project/{project_id}/{user_id}', [ProjectCollaboratorController::class, 'destroy']);
    
 });
 

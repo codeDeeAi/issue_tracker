@@ -104,4 +104,26 @@ class ProjectController extends Controller
                     $q->where('user_id', $user->id);
                 })->orderBy('id', 'desc')->select()->paginate(6);
     }
+
+    /**
+     * Delete Project
+     */
+    public function destroy(Request $request, $project_id)
+    {
+        /**
+         * Get User
+         */
+        $user = Auth::user();
+
+        /**
+         * Check if user is the project author
+         */
+        if(project::where('id', $project_id)->where('user_id', '=',$user->id)->exists()){
+            // Use DB Transaction to delete
+        } else {
+            return response()->json([
+                'message' => 'Only a project author is authorized to perform this action'
+            ], 403);
+        }
+    }
 }

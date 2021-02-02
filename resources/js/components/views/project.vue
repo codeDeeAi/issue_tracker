@@ -7,71 +7,186 @@
                        <p class="lead font-semibold">{{project_name}}</p>
                        <div>
                            <a href="#!" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Add new" @click="createNew"><i class="fa fa-plus"></i></a>
-                           <a href="#!" class="btn btn-sm"><i class="fa fa-plus"></i></a>
-                           <a href="#!" class="btn btn-sm"><i class="fa fa-plus"></i></a>
+                           <a href="#!" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Export sheet"><i class="fa fa-file-export"></i></a>
                        </div>
                    </div>
                    <div class="flex justify-between">
                        <p class="lead font-semibold">AUTHOR :: <span v-for="(author, auth) in author" :key="auth">{{author.admin.name}}</span></p>
-                        <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <i class="fa fa-tools"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#" @click="openCollaborators()">Add collaborator</a>
-                            <a class="dropdown-item" href="#">Remove collaborator</a>
-                            <a class="dropdown-item" href="#">Delete Project</a>
+                        <div class="flex justify-end gap-2">
+                            <div class="dropdown dropleft">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-tools"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#" @click="openCollaborators()">Add collaborator</a>
+                                <a class="dropdown-item" href="#" @click="openRemoveCollaborators()">Remove collaborator</a>
+                                <a class="dropdown-item" href="#" @click="deleteProject()">Delete Project</a>
+                            </div>
+                            </div>
+                            <a href="#!" class="btn btn-sm btn-primary" @click="toggleTray()"><i class="fa fa-search"></i></a>
                         </div>
-                        </div>
-                        <a href="#!" class="btn btn-sm btn-primary" @click="toggleTray()"><i class="fa fa-search"></i></a>
                    </div>
                </div>
-               <div v-if="opentray == true" class="py-6 bg-blue-500">
-
+               <div v-if="opentray == true" class="">
+                <div class="my-2 flex sm:flex-row flex-col gap-4">                    
+                   <div>
+                        <h4 class="text-2xl font-semibold leading-tight">Filters</h4>
+                    </div>
+                    <div class="flex flex-row mb-1 sm:mb-0">
+                        <div class="relative">
+                            <select
+                                class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <select
+                                class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                                <option>All</option>
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block relative">
+                        <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
+                                <path
+                                    d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
+                                </path>
+                            </svg>
+                        </span>
+                        <input placeholder="Search"
+                            class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
+                    </div>
+                </div>
                </div>
            </div>
        </nav>
 
        <!-- Table -->
-       <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Module</th>
-            <th scope="col">Issue</th>
-            <th scope="col">QA user</th>
-            <th scope="col">Date Logged</th>
-            <th scope="col">QA status</th>
-            <th scope="col">Dev user</th>
-            <th scope="col">Dev status</th>
-            <th scope="col">Date Fixed</th>
-            <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(log, i) in data" :key="i">
-            <th scope="row">{{log.id}}</th>
-            <td>
-                <div class="form-group">
-                    <input type="text" class="form-control" :placeholder="log.module" v-model="post.module" autofocus @change="updateModule(log,i)">
+        <div class="container mx-auto px-4 sm:px-8">
+        <div class="py-8">            
+            <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                    <table class="min-w-full leading-normal table-auto">
+                        <thead>
+                            <tr>                         
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    #
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Module
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Issue
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    QA user
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Date Logged
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    QA status
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Dev user
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Dev status
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    Date Fixed
+                                </th>
+                                <th
+                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                   Handle
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(log, i) in data" :key="i">                                
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-gray-900 whitespace-no-wrap">{{i}}</p>
+                                </td>
+                                <td class=" border-b border-gray-200 bg-white text-sm">
+                                    <div class="form-group text-gray-900 whitespace-no-wrap">
+                                        <textarea class="form-control border-0 min-w-full" :placeholder="log.module" @click="triggerTextUpdateForModule(log, i)" v-model="post.module" autofocus @change="updateModule(log,i)"></textarea>
+                                    </div>
+                                </td>
+                                <td class="border-b border-gray-200 bg-white text-sm">
+                                    <div class="form-group text-gray-900 whitespace-no-wrap">
+                                        <textarea class="form-control border-0 min-w-full" :placeholder="log.issue" @click="triggerTextUpdateForIssue(log, i)" v-model="post.issue" autofocus @change="updateIssue(log,i)"></textarea>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <pre @click="openQA(log, i)" class="cursor-pointer text-gray-900 whitespace-no-wrap"><span v-if="log.qa !== null">{{log.qa.name}}</span><span v-if="log.qa == null">None</span></pre>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <pre @click="openDateLoggedModal(log, i)" class="cursor-pointer text-gray-900 whitespace-no-wrap"><span v-if="log.date_logged !== null">{{log.date_logged}}</span><span v-if="log.date_logged == null">--</span></pre>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <span
+                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden
+                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">
+                                            <pre @click="openQaStatusModal(log, i)" class="cursor-pointer">{{log.qa_status}}</pre>                                      </span>
+                                    </span>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        <pre @click="openDEV(log, i)" class="cursor-pointer"><span v-if="log.dev !== null">{{log.dev.name}}</span><span v-if="log.dev == null">None</span></pre>
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <span
+                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden
+                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative">
+                                            <pre @click="openDevStatusModal(log, i)" class="cursor-pointer">{{log.dev_status}}</pre>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <pre @click="openDateFixedModal(log, i)" class="cursor-pointer text-gray-900 whitespace-no-wrap"><span v-if="log.date_fixed !== null">{{log.date_fixed}}</span><span v-if="log.date_fixed == null">--</span></pre>
+                                </td>
+                                <td class="flex justify-between px-5 py-5 border-b border-gray-200 bg-white text-sm gap-2">
+                                    <a href="#!" class="btn btn-sm btn-secondary text-gray-900 whitespace-no-wrap" data-toggle="tooltip" data-placement="top" title="Add attachment(s) (pictures, screenshots)" @click="openAttachmentModal(log, i)"><i class="fa fa-plus-circle"></i></a>
+                                    <a v-if="log.images.length" href="#!" class="btn btn-sm btn-info text-gray-900 whitespace-no-wrap" data-toggle="tooltip" data-placement="top" title="View attachments" @click="viewAttachments(log, i)"><i class="fa fa-eye"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </td>
-            <td>Otto</td>
-            <td>
-                <pre @click="openQA(log, i)" class="cursor-pointer"><span v-if="log.qa !== null">{{log.qa.name}}</span><span v-if="log.qa == null">None</span></pre>
-            </td>
-            <td><pre @click="openDateLoggedModal(log, i)" class="cursor-pointer"><span v-if="log.date_logged !== null">{{log.date_logged}}</span><span v-if="log.date_logged == null">--</span></pre></td>
-            <td><pre @click="openQaStatusModal(log, i)" class="cursor-pointer">{{log.qa_status}}</pre></td>
-            <td><pre @click="openDEV(log, i)" class="cursor-pointer"><span v-if="log.dev !== null">{{log.dev.name}}</span><span v-if="log.dev == null">None</span></pre></td>
-            <td><pre @click="openDevStatusModal(log, i)" class="cursor-pointer">{{log.dev_status}}</pre></td>
-            <td><pre @click="openDateFixedModal(log, i)" class="cursor-pointer"><span v-if="log.date_fixed !== null">{{log.date_fixed}}</span><span v-if="log.date_fixed == null">--</span></pre></td>
-            <td class="flex justify-between">
-                <a href="#!" class="btn btn-sm btn-secondary"><i class="fa fa-plus-circle"></i></a>
-                <a href="#!" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
-            </td>
-            </tr>
-        </tbody>
-        </table>
+            </div>
+        </div>
+    </div>
        <!-- Table Ends -->
        <!-- Modals -->
        <!-- Collaborators Modal -->
@@ -172,6 +287,7 @@
                     <div class="form-group">
                         <label>Choose one</label>
                         <select v-model="post.qaUser.value" class="form-control" autofocus @change="updateQaUser()">
+                            <option v-for="(author, auth) in author" :key="auth" :value="author.admin.id">{{author.admin.name}}</option>
                             <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id">{{coll.user[0].name}}</option>
                         </select>
                     </div>
@@ -197,6 +313,7 @@
                     <div class="form-group">
                         <label>Choose one</label>
                         <select v-model="post.devUser.value" class="form-control" autofocus @change="updateDevUser()">
+                            <option v-for="(author, auth) in author" :key="auth" :value="author.admin.id">{{author.admin.name}}</option>
                             <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id">{{coll.user[0].name}}</option>
                         </select>
                     </div>
@@ -253,6 +370,75 @@
         </div>
         </div>
         <!-- Date Fixed Modal Ends -->
+        <!-- Remove Collaborator  Modal -->
+        <div class="modal fade" id="removeCollaboratorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content px-4">            
+            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
+              <div class="flex justify-end">
+                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="">
+                <div class="">
+                    <div class="form-group">
+                        <label>Choose one</label>
+                        <select v-model="post.removeCollaborator" class="form-control" autofocus @change="removeCollaborator()">
+                            <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id">{{coll.user[0].name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            </div>            
+            </div>
+        </div>
+        </div>
+        <!-- Remove Collaborator  Modal Ends -->
+        <!-- View Attachment Modal -->
+        <div class="modal fade" id="viewAttachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content px-4">            
+            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
+              <div class="flex justify-end">
+                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="">
+                <div class="">
+                    <div class="form-group">
+                        View
+                    </div>
+                </div>
+            </div>
+            </div>            
+            </div>
+        </div>
+        </div>
+        <!-- View Attachment Modal Ends -->
+        <!-- Add Attachment Modal -->
+        <div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content px-4">            
+            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
+              <div class="flex justify-end">
+                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="">
+                <div class="">
+                    <div class="form-group">
+                        Upload 
+                    </div>
+                </div>
+            </div>
+            </div>            
+            </div>
+        </div>
+        </div>
+        <!-- Add Attachment Modal Ends -->
        <!-- Modals ends -->
     </div>
 </template>
@@ -270,6 +456,7 @@ export default {
             collaborators:[],
             post:{
                 module:'',
+                issue:'',
                 qaStat:{
                     id: null,
                     value: ''
@@ -294,7 +481,7 @@ export default {
                     id: null,
                     value: null,
                 },
-
+                removeCollaborator:null,
             },
             searchUser:'',
             allSearchedUsers:[
@@ -376,6 +563,12 @@ export default {
             if(res.status == 200)
                 this.fetchData()
         },
+        /** 
+         * Update module text
+         */
+        triggerTextUpdateForModule(log, i){
+            this.post.module = log.module
+        },
         /**
          * Update Module
          */
@@ -389,8 +582,30 @@ export default {
                 }
             )
             if(res.status == 200)
+                this.post.module = ''
                 return this.fetchData()
-                // return this.data.unshift(log)
+        },
+        /** 
+         * Update issue text
+         */
+        triggerTextUpdateForIssue(log, i){
+            this.post.issue = log.issue
+        },
+        /**
+         * Update issue
+         */
+        async updateIssue(log, i){
+            const res = await this.callApi(
+                'put',
+                'app/update_issue_issue',
+                {
+                    id: log.id,
+                    value: this.post.issue
+                }
+            )
+            if(res.status == 200)
+                this.post.issue = ''
+                return this.fetchData()
         },
         /**
          * Open Collaborators Modal
@@ -415,6 +630,36 @@ export default {
                 return this.fetchCollaborators()
             } else if (res.status == 403){
                 this.toastError(res.data.message)
+            }
+        },
+        /**
+         * Open Remove COllaborators Modal
+         */
+        openRemoveCollaborators(){
+            /**
+             * Open modal
+             */
+            $('#removeCollaboratorModal').modal('show')
+        },
+        /**
+         * Remove Collaborator
+         */
+        async removeCollaborator(){
+            if(!confirm)
+                return this.toast('This Collaborator will not be removed from this project!', 'info')
+            else{
+                const res = await this.callApi(
+                    'delete',
+                    `app/remove_collaborator_from_project/${this.project_id}/${this.post.removeCollaborator}`,
+                    {
+
+                    }                
+                )
+                if(res.status == 200){
+                    this.toast(`${user.name} has been added as a collaborator`, 'success')
+                    this.fetchCollaborators()
+                    this.fetchData()
+                }
             }
         },
         /**
@@ -565,7 +810,45 @@ export default {
                 $('#dateFixedModal').modal('hide')
                 return this.fetchData()
         },
-        
+        /**
+         * Open Attachment Modal
+         */
+        openAttachmentModal(log, i){
+            /** open modal */
+            $('#attachmentModal').modal('show')
+        },
+        /**
+         * View Attachment Modal
+         */
+        viewAttachments(log, i){
+            /** open modal */
+            $('#viewAttachmentModal').modal('show')
+        },
+        /**
+         * Delete Project
+         */
+        async deleteProject(){
+            if(!confirm){
+                this.toast('Project will not be deleted','info')
+            } else { 
+                const res = await this.callApi(
+                    'delete',
+                    `app/delete_project/${this.project_id}`,
+                    {
+
+                    }
+                )
+
+                if(res.status == 200){
+                    window.location.assign('/dashboard')
+                } else if(res.status == 403){
+                    this.toastError(res.data.message)
+                } else {
+                    this.toastError('Something went wrong')
+                }
+            }
+
+        }
         
     },
     created(){

@@ -1,33 +1,55 @@
 <template>
 <div class="container"> 
     <div class="py-12">
-        <div class="a h-1/2">
-            <div class="flex justify-start">
-                <h2 class="">My projects</h2>
+        <div class="a h-1/2 my-2">
+            <div class="flex justify-start py-2">
+                <h2 class="h2 font-semibold">My projects</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-10">
+                <button type="button" class="rounded h-40 border my-4 btn-primary hover:shadow py-auto"  data-toggle="modal" data-target="#staticBackdrop">
+                        Create New Project
+                </button>
                 <div class="h-50">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-                        create new project
-                    </button>
+                    
                 </div>
-                <div class="h-50" v-for="(pro , p) in myProjects.data" :key="p">
-                    {{pro}}
-                    <a :href="`/project${pro.id}`" class="btn btn-primary btn-sm">Load</a>
+                <div class="rounded h-40 border my-4 hover:shadow cursor-pointer" v-for="(pro , p) in myProjects.data" :key="p">
+                    <form class="flex-auto pl-6 py-4 px-4">
+                        <h1 class="w-full flex-none font-semibold mb-2.5">
+                           {{pro.name}}
+                        </h1>
+                        <div class="text-sm font-medium">
+                            {{pro.description}}
+                        </div>
+                        <div class="flex justify-end">
+                            <a :href="`/project${pro.id}`" class="btn flex justify-between btn-sm rounded-full btn-primary text-white px-auto py-auto"><i class="fa fa-arrow-right fa-2x"></i></a>
+                        </div>
+                    </form>
                 </div>
             </div>
             <pagination :data="myProjects" size="small" @pagination-change-page="fetchMyProjects"></pagination>
         </div>
         <hr>
-        <div class="a h-1/2">
+        <div class="a h-1/2 my-2">
             <div class="flex justify-start">
-                <h2 class="">Other projects</h2>
+                <h2 class="h2 font-semibold py-2">Other projects</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-10">
-                <div class="h-50" v-for="(oth , ot) in otherProjects.data" :key="ot">
-                    {{oth}}
-                    <a :href="`/project${oth.id}`" class="btn btn-primary btn-sm">Load</a>
+                <div class="rounded h-40 border my-4 hover:shadow cursor-pointer" v-for="(oth , ot) in otherProjects.data" :key="ot">
+                    <form class="flex-auto pl-6 py-4 px-4">
+                        <div class="flex justify-end">
+                            <p class="text-sm italic">{{oth.admin.name}}</p>
+                        </div>
+                        <h1 class="w-full flex-none font-semibold mb-2.5">
+                           {{oth.name}}
+                        </h1>
+                        <div class="text-sm font-medium">
+                            {{oth.description}}
+                        </div>
+                        <div class="flex justify-end">
+                            <a :href="`/project${oth.id}`" class="btn flex justify-between btn-sm rounded-full btn-primary text-white px-auto py-auto"><i class="fa fa-arrow-right fa-2x"></i></a>
+                        </div>
+                    </form>
                 </div>
             </div>
             <pagination :data="otherProjects" size="small" @pagination-change-page="fetchOtherProjects"></pagination>

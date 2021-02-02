@@ -61,6 +61,20 @@ class ProjectIssueController extends Controller
             'module' => $request->value
        ]);
     }
+
+    /** Update Issue */
+    public function updateIssue(Request $request)
+    {
+       $this->validate($request, [
+           'id' => 'required',
+           'value' => 'bail|required'
+       ]);
+
+       project_issue::where('id', $request->id)->update([
+            'issue' => $request->value
+       ]);
+    }
+    
      /** Update QA Status */
      public function updateQaStat(Request $request)
      {
