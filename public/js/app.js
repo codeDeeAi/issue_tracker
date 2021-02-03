@@ -4514,58 +4514,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['project_id', 'project_name'],
   data: function data() {
@@ -5220,22 +5168,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee15);
       }))();
-    },
-
-    /**
-     * Open Attachment Modal
-     */
-    openAttachmentModal: function openAttachmentModal(log, i) {
-      /** open modal */
-      $('#attachmentModal').modal('show');
-    },
-
-    /**
-     * View Attachment Modal
-     */
-    viewAttachments: function viewAttachments(log, i) {
-      /** open modal */
-      $('#viewAttachmentModal').modal('show');
     },
 
     /**
@@ -25845,58 +25777,6 @@ var render = function() {
                                 ]
                               )
                             ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            {
-                              staticClass:
-                                "flex justify-between px-5 py-5 border-b border-gray-200 bg-white text-sm gap-2"
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-sm btn-secondary text-gray-900 whitespace-no-wrap",
-                                  attrs: {
-                                    href: "#!",
-                                    "data-toggle": "tooltip",
-                                    "data-placement": "top",
-                                    title:
-                                      "Add attachment(s) (pictures, screenshots)"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.openAttachmentModal(log, i)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "fa fa-plus-circle" })]
-                              ),
-                              _vm._v(" "),
-                              log.images.length
-                                ? _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "btn btn-sm btn-info text-gray-900 whitespace-no-wrap",
-                                      attrs: {
-                                        href: "#!",
-                                        "data-toggle": "tooltip",
-                                        "data-placement": "top",
-                                        title: "View attachments"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.viewAttachments(log, i)
-                                        }
-                                      }
-                                    },
-                                    [_c("i", { staticClass: "fa fa-eye" })]
-                                  )
-                                : _vm._e()
-                            ]
                           )
                         ])
                       }),
@@ -26657,11 +26537,7 @@ var render = function() {
           ]
         )
       ]
-    ),
-    _vm._v(" "),
-    _vm._m(14),
-    _vm._v(" "),
-    _vm._m(15)
+    )
   ])
 }
 var staticRenderFns = [
@@ -26872,19 +26748,6 @@ var staticRenderFns = [
               "\n                                Date Fixed\n                            "
             )
           ]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-          },
-          [
-            _vm._v(
-              "\n                               Handle\n                            "
-            )
-          ]
         )
       ])
     ])
@@ -27008,134 +26871,6 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "viewAttachmentModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content px-4" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
-                },
-                [
-                  _c("div", { staticClass: "flex justify-end" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "close",
-                        attrs: {
-                          href: "#!",
-                          "data-dismiss": "modal",
-                          "aria-label": "Close"
-                        }
-                      },
-                      [
-                        _c("span", { attrs: { "aria-hidden": "true" } }, [
-                          _vm._v("×")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {}, [
-                    _c("div", {}, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _vm._v("\n                    View\n                ")
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "attachmentModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content px-4" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4"
-                },
-                [
-                  _c("div", { staticClass: "flex justify-end" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "close",
-                        attrs: {
-                          href: "#!",
-                          "data-dismiss": "modal",
-                          "aria-label": "Close"
-                        }
-                      },
-                      [
-                        _c("span", { attrs: { "aria-hidden": "true" } }, [
-                          _vm._v("×")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {}, [
-                    _c("div", {}, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _vm._v(
-                          "\n                    Upload \n                "
-                        )
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true

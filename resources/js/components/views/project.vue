@@ -122,10 +122,6 @@
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Date Fixed
                                 </th>
-                                <th
-                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                   Handle
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -175,10 +171,6 @@
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <pre @click="openDateFixedModal(log, i)" class="cursor-pointer text-gray-900 whitespace-no-wrap"><span v-if="log.date_fixed !== null">{{log.date_fixed}}</span><span v-if="log.date_fixed == null">--</span></pre>
-                                </td>
-                                <td class="flex justify-between px-5 py-5 border-b border-gray-200 bg-white text-sm gap-2">
-                                    <a href="#!" class="btn btn-sm btn-secondary text-gray-900 whitespace-no-wrap" data-toggle="tooltip" data-placement="top" title="Add attachment(s) (pictures, screenshots)" @click="openAttachmentModal(log, i)"><i class="fa fa-plus-circle"></i></a>
-                                    <a v-if="log.images.length" href="#!" class="btn btn-sm btn-info text-gray-900 whitespace-no-wrap" data-toggle="tooltip" data-placement="top" title="View attachments" @click="viewAttachments(log, i)"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -395,50 +387,6 @@
         </div>
         </div>
         <!-- Remove Collaborator  Modal Ends -->
-        <!-- View Attachment Modal -->
-        <div class="modal fade" id="viewAttachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content px-4">            
-            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
-              <div class="flex justify-end">
-                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </a>
-            </div>
-            <div class="">
-                <div class="">
-                    <div class="form-group">
-                        View
-                    </div>
-                </div>
-            </div>
-            </div>            
-            </div>
-        </div>
-        </div>
-        <!-- View Attachment Modal Ends -->
-        <!-- Add Attachment Modal -->
-        <div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content px-4">            
-            <div class="modal-body container border rounded-tr-2xl rounded-bl-2xl py-1 my-4">
-              <div class="flex justify-end">
-                <a href="#!" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </a>
-            </div>
-            <div class="">
-                <div class="">
-                    <div class="form-group">
-                        Upload 
-                    </div>
-                </div>
-            </div>
-            </div>            
-            </div>
-        </div>
-        </div>
-        <!-- Add Attachment Modal Ends -->
        <!-- Modals ends -->
     </div>
 </template>
@@ -809,20 +757,6 @@ export default {
             if(res.status == 200)
                 $('#dateFixedModal').modal('hide')
                 return this.fetchData()
-        },
-        /**
-         * Open Attachment Modal
-         */
-        openAttachmentModal(log, i){
-            /** open modal */
-            $('#attachmentModal').modal('show')
-        },
-        /**
-         * View Attachment Modal
-         */
-        viewAttachments(log, i){
-            /** open modal */
-            $('#viewAttachmentModal').modal('show')
         },
         /**
          * Delete Project

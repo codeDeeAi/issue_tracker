@@ -67,6 +67,7 @@
         <script src="/js/jquery-ui.js"></script>
         <script src="/js/popper.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/bootstrap-datepicker.min.js"></script>
+        <script src="/js/bootstrap-datepicker.min.js"></script>       
+        
     </body>
 </html>
