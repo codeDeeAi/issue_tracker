@@ -11,10 +11,31 @@ class ProjectIssueController extends Controller
     /**
      * Get All Project issues
      */
-   public function index(Request $request, $id)
+   public function index(Request $request, $id, $qa_user, $dev_user, $qa_status, $dev_status, $date_logged, $date_fixed, $keyword)
    {
-    
-        return project_issue::where('project_id', $id)->orderBy('id', 'desc')->get();
+       /**
+        * 
+        */
+       if($qa_user !== 'null' || $dev_user !== 'null' || $qa_status !== 'null' || $dev_status !== 'null' || $date_logged !== 'null' || $date_fixed !== 'null' || $keyword !== 'null'){
+        return project_issue::where('project_id', $id)
+                                ->orWhereHas('qa', function($q) use($qa_user){
+                                    $q->where('id', $qa_user);
+                                })
+                                ->orWhereHas('dev', function($q) use($dev_user){
+                                    $q->where('id', $dev_user);
+                                })
+                                ->orWhere('qa_status', 'LIKE', '%' .$qa_status. '%')
+                                ->orWhere('dev_status', 'LIKE', '%' .$dev_status. '%')
+                                ->orWhere('date_logged', 'LIKE', '%'.$date_logged.'%')
+                                ->orWhere('date_fixed', 'LIKE', '%'.$date_fixed.'%')
+                                ->orWhere('module', 'LIKE', $keyword)
+                                ->orWhere('issue', 'LIKE', $keyword)
+                                ->get();
+       } else {
+            // Fetch Results 
+            return project_issue::where('project_id', $id)->orderBy('id', 'desc')->get();  
+
+       }   
 
    }
 

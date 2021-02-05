@@ -46,7 +46,7 @@ Route::prefix('app')->middleware(['auth'])->group(function(){
    /**
     * Issues Tracker 
    */
-  Route::get('/get_all_project_issues/{id}', [ProjectIssueController::class, 'index']); 
+  Route::get('/get_all_project_issues/{id}/{qa_user}/{dev_user}/{qa_status}/{dev_status}/{date_logged}/{date_fixed}/{keyword}', [ProjectIssueController::class, 'index']); 
   Route::get('/get_project_author/{id}', [ProjectIssueController::class, 'showAuthor']);
   Route::post('/create_new_issue', [ProjectIssueController::class, 'create']);  
   Route::put('/update_issue_module', [ProjectIssueController::class, 'updateModule']); 

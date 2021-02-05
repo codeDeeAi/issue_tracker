@@ -11,7 +11,7 @@
                        </div>
                    </div>
                    <div class="flex justify-between">
-                       <p class="lead font-semibold">AUTHOR :: <span v-for="(author, auth) in author" :key="auth">{{author.admin.name}}</span></p>
+                       <p class="lead font-semibold">AUTHOR :: <span v-for="(author, auth) in author" :key="`new-${auth}`">{{author.admin.name}}</span></p>
                         <div class="flex justify-end gap-2">
                             <div class="dropdown dropleft">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,46 +32,55 @@
                    <div>
                         <h4 class="text-2xl font-semibold leading-tight">Filters</h4>
                     </div>
-                    <div class="flex flex-row mb-1 sm:mb-0">
-                        <div class="relative">
-                            <select
-                                class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option>5</option>
-                                <option>10</option>
-                                <option>20</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <select
-                                class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                                <option>All</option>
-                                <option>Active</option>
-                                <option>Inactive</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </div>
-                        </div>
+                    <div class="flex flex-row mb-1 sm:mb-0 gap-2">
+                    <div class="form-group">
+                        <label>QA User</label>
+                        <select v-model="searchFilters.qa_user" class="form-control">
+                            <option value="null">None</option>
+                            <option v-for="(author, auth) in author" :key="`new1-${auth}`" :value="author.admin.id">{{author.admin.name}}</option>
+                            <option v-for="(coll, col) in collaborators" :key="`new-${col}`" :value="coll.user_id"><span v-for="(usr, u) in coll.user" :key='`new-${u}`'>{{usr.name}}</span></option>
+                        </select>
                     </div>
-                    <div class="block relative">
-                        <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
-                                <path
-                                    d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
-                                </path>
-                            </svg>
-                        </span>
-                        <input placeholder="Search"
-                            class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
+                     <div class="form-group">
+                        <label>Dev User</label>
+                        <select v-model="searchFilters.dev_user" class="form-control">
+                            <option value="null">None</option>
+                            <option v-for="(author, auth) in author" :key="`new2-${auth}`" :value="author.admin.id">{{author.admin.name}}</option>
+                            <option v-for="(coll, col) in collaborators" :key="`new1-${col}`" :value="coll.user_id"><span v-for="(usr, u) in coll.user" :key='`new1-${u}`'>{{usr.name}}</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>QA Status</label>
+                        <select v-model="searchFilters.qa_status" class="form-control">
+                            <option value="null">None</option>
+                            <option value="open">Open</option>
+                            <option value="closed">Closed</option>
+                            <option value="unresolved">Unresolved</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Dev Status</label>
+                        <select v-model="searchFilters.dev_status" class="form-control">
+                            <option value="null">None</option>
+                            <option value="open">Open</option>
+                            <option value="closed">Closed</option>
+                            <option value="unresolved">Unresolved</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date Logged</label>
+                        <input v-model="searchFilters.date_logged" type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Date Fixed</label>
+                        <input v-model="searchFilters.date_fixed" type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Keyword</label>
+                        <input v-model="searchFilters.keyword" type="search" class="form-control">
+                    </div>
+                    <button class="btn btn-primary btn-sm" @click="fetchData()">Search</button>
+                    <button class="btn btn-secondary btn-sm" @click="clearBtn()">Clear</button>
                     </div>
                 </div>
                </div>
@@ -280,7 +289,7 @@
                         <label>Choose one</label>
                         <select v-model="post.qaUser.value" class="form-control" autofocus @change="updateQaUser()">
                             <option v-for="(author, auth) in author" :key="auth" :value="author.admin.id">{{author.admin.name}}</option>
-                            <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id">{{coll.user[0].name}}</option>
+                            <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id"><span v-for="(usr, u) in coll.user" :key='u'>{{usr.name}}</span></option>
                         </select>
                     </div>
                 </div>
@@ -306,7 +315,7 @@
                         <label>Choose one</label>
                         <select v-model="post.devUser.value" class="form-control" autofocus @change="updateDevUser()">
                             <option v-for="(author, auth) in author" :key="auth" :value="author.admin.id">{{author.admin.name}}</option>
-                            <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id">{{coll.user[0].name}}</option>
+                            <option v-for="(coll, col) in collaborators" :key="col" :value="coll.user_id"><span v-for="(usr, u) in coll.user" :key='u'>{{usr.name}}</span></option>
                         </select>
                     </div>
                 </div>
@@ -434,7 +443,16 @@ export default {
             searchUser:'',
             allSearchedUsers:[
 
-            ]
+            ],
+            searchFilters:{
+                qa_user:null,
+                dev_user:null,
+                qa_status:null,
+                dev_status:null,
+                date_logged:null,
+                date_fixed:null,
+                keyword:null
+            }
         }
     },
     methods: {
@@ -444,7 +462,7 @@ export default {
         async fetchData(){
             const res = await this.callApi(
                 'get',
-                `app/get_all_project_issues/${this.project_id}`,
+                `app/get_all_project_issues/${this.project_id}/${this.searchFilters.qa_user}/${this.searchFilters.dev_user}/${this.searchFilters.qa_status}/${this.searchFilters.dev_status}/${this.searchFilters.date_logged}/${this.searchFilters.date_fixed}/${this.searchFilters.keyword}`,
                 this.project_id
             )
             if (res.status == 200)
@@ -757,6 +775,21 @@ export default {
             if(res.status == 200)
                 $('#dateFixedModal').modal('hide')
                 return this.fetchData()
+        },
+        /**
+         * Clear search filters
+         */
+        clearBtn(){
+            // Clear Filters
+            this.searchFilters.qa_user = null
+            this.searchFilters.devUser = null
+            this.searchFilters.qa_status = null
+            this.searchFilters.dev_status = null
+            this.searchFilters.dateLogged = null
+            this.searchFilters.date_fixed = null
+            this.searchFilters.keyword = null
+            // Return Data
+            this.fetchData()
         },
         /**
          * Delete Project
