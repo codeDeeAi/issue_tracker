@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Aveon Issue Tracker')
+@section('title', 'Eagle Bug Tracker')
 @section('content')
 
 {{-- Navigation --}}

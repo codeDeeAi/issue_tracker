@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\project;
+use App\Models\project_collaborator;
+use App\Models\project_issue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -120,6 +123,28 @@ class ProjectController extends Controller
          */
         if(project::where('id', $project_id)->where('user_id', '=',$user->id)->exists()){
             // Use DB Transaction to delete
+            DB::beginTransaction();
+            try {
+                /**
+                 *  1. Delete All collaborators for the project
+                 *  2. Delete All project issues related to project
+                 *  3. Delete Project from DB
+                 */
+                project_collaborator::where('project_id', $project_id)->delete();
+
+                project_issue::where('project_id', $project_id)->delete();
+
+                project::where('id', $project_id)->delete();
+
+
+                DB::commit();
+                return response()->json([
+                    'message' => 'Success'
+                ], 200);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                throw $th;
+            }
         } else {
             return response()->json([
                 'message' => 'Only a project author is authorized to perform this action'

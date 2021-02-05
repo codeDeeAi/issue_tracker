@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Aveon Issue Tracker')
+@section('title', 'Eagle Bug Tracker')
 @section('content')
 
 <div> 

@@ -69,7 +69,7 @@
             <header class="bg-white shadow">
                 <div class="container-fluid mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Aveon Issue Tracker') }}
+                        {{ __('Eagle Bug Tracker') }}
                     </h2>
                 </div>
             </header>
