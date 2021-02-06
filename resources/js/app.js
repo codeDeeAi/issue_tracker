@@ -27,6 +27,11 @@ import VueToast from 'vue-toast-notification';
 // import 'vue-toast-notification/dist/theme-default.css';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
+// Import Vue Json to Excel 
+import JsonExcel from 'vue-json-excel'
+
+Vue.component("downloadExcel", JsonExcel)
+
 Vue.use(VueToast, {
     // One of the options
     position: 'top-right',

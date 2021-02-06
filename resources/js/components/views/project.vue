@@ -7,7 +7,7 @@
                        <p class="lead font-semibold">{{project_name}}</p>
                        <div>
                            <a href="#!" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Add new" @click="createNew"><i class="fa fa-plus"></i></a>
-                           <a href="#!" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Export sheet"><i class="fa fa-file-export"></i></a>
+                           <download-excel :data="data" :worksheet="project_name" :fields="json_fields" :name="project_name"  href="#!" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Export sheet"><i class="fa fa-file-export"></i></download-excel>
                        </div>
                    </div>
                    <div class="flex justify-between">
@@ -452,6 +452,16 @@ export default {
                 date_logged:null,
                 date_fixed:null,
                 keyword:null
+            },
+            json_fields:{
+                Module: "module",
+                Issue: "issue",
+                "QA User": "qa.name",
+                "Date Logged": "date_logged",
+                "QA Status": "qa_status",
+                "Dev User": "dev.name",
+                "Dev Status": "dev_status",
+                "Date Fixed": "date_fixed"   
             }
         }
     },
@@ -815,7 +825,7 @@ export default {
                 }
             }
 
-        }
+        },
         
     },
     created(){

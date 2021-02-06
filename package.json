@@ -29,6 +29,7 @@
         "pusher-js": "^7.0.2",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
         "vue": "^2.6.12",
+        "vue-json-excel": "^0.3.0",
         "vue-resource": "^1.5.1",
         "vue-router": "^3.4.7",
         "vue-toast-notification": "^0.5.4",
