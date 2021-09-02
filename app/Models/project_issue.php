@@ -16,7 +16,7 @@ class project_issue extends Model
     /**
      * Protected with
      */
-    protected $with = ['dev', 'qa', 'images'];
+    protected $with = ['dev', 'qa'];
 
     /**
      * Relationships
